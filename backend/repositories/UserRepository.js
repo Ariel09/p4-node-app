@@ -7,6 +7,16 @@ class UserRepository{
     return user;
   }
 
+  async update(id){
+
+  }
+
+  async findAll(){
+    const users = await User.find();
+
+    return users;
+  }
+
   async findUser(data){
     const findData = await User.findOne(data);
 

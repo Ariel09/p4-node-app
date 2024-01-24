@@ -5,6 +5,8 @@ import bodyParser from 'body-parser';
 import connectDB from './config/db.js';
 import errorHandler from './middleware/errorHandler.js';
 import userRoutes from './routes/userRoutes.js';
+import transactionRoutes from './routes/TransactionRoutes.js'
+import categoryRoutes from './routes/CategoryRoutes.js'
 import cors from 'cors';
 
 
@@ -31,6 +33,8 @@ connectDB().then(() => {
     })
   })
   app.use('/api/users', userRoutes);
+  app.use('/api/categories', categoryRoutes);
+  app.use('/api/transactions', transactionRoutes);
 
   app.use(errorHandler);
   app.listen(PORT, () => {

@@ -4,6 +4,7 @@ import GuestLayout from './layouts/GuestLayout';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Income from './pages/Income';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element: <Dashboard/>
       },
+      {
+        path: '/income',
+        element: <Income/>
+      }
     ]
   },
   {

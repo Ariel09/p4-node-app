@@ -75,6 +75,15 @@ export const loginUser = asyncHandler(async (req, res) => {
   }
 })
 
+export const getUser = asyncHandler(async (req, res) =>{
+  const users = await userRepository.findAll();
+
+  res.status(200).json({
+    message: 'Success!',
+    data: users
+  })
+})
+
 export const getMe = asyncHandler(async (req, res) =>{
   res.status(200).json(req.user);
 })
