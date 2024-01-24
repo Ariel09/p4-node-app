@@ -1,7 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import User from '../models/UserModel.js';
 import UserRepository from '../repositories/UserRepository.js';
 import UserFactory from '../factories/UserFactory.js';
 
@@ -40,11 +39,11 @@ export const registerUser = asyncHandler(async (req, res) =>{
 
   res.status(201).json({
     message: 'User Successfully added!',
+    token: generateToken(user._id),
     data: {
       _id: user.id,
       name: user.fullName,
       email: user.email,
-      token: generateToken(user._id),
     }
   })
 
@@ -61,11 +60,12 @@ export const loginUser = asyncHandler(async (req, res) => {
     if(comparePass){
       res.status(201).json({
         message: 'Successfully Login!',
+        token: generateToken(user._id),
         data: {
           _id: user.id,
           name: user.fullName,
           email: user.email,
-          token: generateToken(user._id),
+          
         }
       })
     }

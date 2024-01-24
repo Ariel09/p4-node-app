@@ -10,7 +10,6 @@ export const fetchData = async (url) => {
 
 export const postData = async (method, data, url) =>{
   try {
-    console.log(data)
     const response = await fetch('http://127.0.0.1:3000/api'+url, {
       method: method,      
       headers: {
