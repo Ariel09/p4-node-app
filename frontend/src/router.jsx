@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Income from './pages/Income';
+import Transaction from './pages/Transaction';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: '/income',
         element: <Income/>
+      },
+      {
+        path: '/transaction',
+        element: <Transaction/>
       }
     ]
   },

@@ -7,6 +7,7 @@ import errorHandler from './middleware/errorHandler.js';
 import userRoutes from './routes/userRoutes.js';
 import transactionRoutes from './routes/TransactionRoutes.js'
 import categoryRoutes from './routes/CategoryRoutes.js'
+import typeRoutes from './routes/TypeRoutes.js'
 import cors from 'cors';
 
 
@@ -35,6 +36,7 @@ connectDB().then(() => {
   app.use('/api/users', userRoutes);
   app.use('/api/categories', categoryRoutes);
   app.use('/api/transactions', transactionRoutes);
+  app.use('/api/types', typeRoutes)
 
   app.use(errorHandler);
   app.listen(PORT, () => {

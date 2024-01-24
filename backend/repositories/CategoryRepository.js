@@ -7,6 +7,12 @@ class CategoryRepository{
     return category;
   }
 
+  async findByType(type){
+    const categories = Category.find({type});
+
+    return categories;
+  }
+
   async findCategory(category){
     const findData = Category.findOne(category);
 

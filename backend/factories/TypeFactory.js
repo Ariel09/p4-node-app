@@ -1,4 +1,4 @@
-import Type from "../models/Types";
+import Type from "../models/Types.js";
 
 class TypeFactory{
   create(type){

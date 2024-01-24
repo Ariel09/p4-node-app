@@ -35,7 +35,7 @@ function Signup() {
       password: data.get('password'),
     };
 
-    const response = await postData('POST', newData, '/users/');
+    const response = await postData('POST', newData, '/users/new');
     const responseData = await response.json();
     console.log(responseData)
     if(response.ok){

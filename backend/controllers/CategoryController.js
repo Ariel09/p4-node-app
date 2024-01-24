@@ -31,3 +31,14 @@ export const registerCategory = asyncHandler(async (req, res) =>{
     }
   })
 });
+
+export const getCategoryByType = asyncHandler(async (req, res) => {
+  const type = req.params.type;
+
+  const categories = await categoryRepository.findByType(type);
+
+  res.status(200).json({
+    message: 'Success!',
+    data: categories
+  })
+})
