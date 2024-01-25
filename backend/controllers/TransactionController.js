@@ -51,3 +51,18 @@ export const getAllTransaction = asyncHandler(async (req, res) => {
     data: transactions,
   })
 });
+
+export const deleteTransaction = asyncHandler(async (req, res) => {
+  const id = req.params.typeId;
+
+  console.log(id)
+  transactionRepository.delete(id);
+
+  const statusCode = res.statusCode;
+
+  if(statusCode === 200){
+    res.json({
+      message: 'Successfully Deleted!'
+    })
+  }
+})

@@ -40,7 +40,7 @@ function Signup() {
     console.log(responseData)
     if(response.ok){
       setToken(responseData.token)
-      setUser(responseData.data)
+      setUser(responseData.data.name)
     }
 
 

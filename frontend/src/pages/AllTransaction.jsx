@@ -13,7 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import {Link} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useStateContext } from '../contexts/ContextProvider';
-import { fetchData } from '../fetch/fetchData';
+import { fetchData, postData } from '../fetch/fetchData';
 
 
 function AllTransaction() {
@@ -42,7 +42,19 @@ function AllTransaction() {
       console.error('Error: ', error.message)
     }
   }
- 
+  
+  const handleClick = async (id) =>{
+    try {
+      const response = await postData('DELETE', null, `/transaction/${id}`, token );
+      const responesData = await response.json();
+      console.log(responesData)
+      if(response.ok){
+        await getAllTransaction()
+      }
+    } catch (error) {
+      console.error('Error: ', error.message) 
+    }
+  }
 
   useEffect(()=>{
     console.log(sortType)
@@ -85,7 +97,7 @@ function AllTransaction() {
               <TableCell align="right">TYPE</TableCell>
               <TableCell align="right">CATEGORY</TableCell>
               <TableCell align="right">CREATED AT</TableCell>
-              <TableCell align="right">ACTION</TableCell>
+              <TableCell align="center">ACTION</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

@@ -24,6 +24,10 @@ class TransactionRepository{
 
     return transactions;
   }
+
+  delete(id){
+    Transaction.findByIdAndDelete(id);
+  }
   
 }
 

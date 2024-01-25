@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
-import Navbar from "../pages/NavBar";
 import { useStateContext } from "../contexts/ContextProvider";
 import { Navigate } from "react-router-dom";
+import Navbar from "../pages/NavBar";
 
 function DefaulLayout() {
   const {token} = useStateContext();

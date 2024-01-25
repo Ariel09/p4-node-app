@@ -40,7 +40,7 @@ function Login() {
 
     if(response.ok){
       setToken(responseData.token);
-      setUser(responseData.data);
+      setUser(responseData.data.name);
     }
 
     setError([responseData.message]);
