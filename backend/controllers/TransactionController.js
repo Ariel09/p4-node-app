@@ -28,4 +28,26 @@ export const addTransaction = asyncHandler(async (req, res) => {
       amount: transaction.amount
     }
   })
-})
+});
+
+export const getAllTransaction = asyncHandler(async (req, res) => {
+  const user = req.user._id;
+  const typeId = req.params.typeId;
+
+  if(typeId){
+    const transactions = await transactionRepository.findByType(user, typeId);
+
+    res.status(200).send({
+      message: 'Success!',
+      data: transactions,
+    })
+    return
+  }
+
+  const transactions = await transactionRepository.findAll(user);
+
+  res.status(200).json({
+    message: 'Success!',
+    data: transactions,
+  })
+});
