@@ -35,7 +35,7 @@ function Login() {
       password: data.get('password'),
     };
     
-    const response = await postData('POST', payload, '/users/login');
+    const response = await postData('POST', '/users/login', null, payload);
     const responseData = await response.json();
 
     if(response.ok){

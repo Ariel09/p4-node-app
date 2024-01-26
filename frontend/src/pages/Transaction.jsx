@@ -23,8 +23,6 @@ function Transaction() {
   });
 
   if(id){
-
-
     useEffect(() => {
       const getTransaction = async () => {
         try {
@@ -42,23 +40,22 @@ function Transaction() {
           console.error('Error: ', error.message);
         }
       }
-
       getTransaction();
     }, [])
   }
 
   const handleChange = (e) => {
-    console.log(e.target.name)
+
     dispatch({
-        type: e.target.name,
-        payload: e.target.value
+      type: e.target.name,
+      payload: e.target.value
     })
   }
 
   const handleTypeChange = async (e) =>{
     dispatch({
-        type: e.target.name,
-        payload: e.target.value
+      type: e.target.name,
+      payload: e.target.value
     })
 
     await getCategory(e.target.value);
@@ -77,7 +74,8 @@ function Transaction() {
       }
 
       const response = await postData(method, url, token, transaction);
-
+      const responseData = await response.json();
+      console.log(responseData);
       if(response.ok){
         navigate('/dashboard');
       }
@@ -142,7 +140,7 @@ function Transaction() {
           noValidate
           autoComplete="off"
         >
-          <TextField onChange={handleChange} id="amount" name='amount' label="Amount" variant="outlined" value={transaction.amount} />
+          <TextField onChange={handleChange} id="amount" name='amount' label="Amount" variant="outlined" value={transaction.amount} type='number' />
           <TextField onChange={handleTypeChange} id="type" name='type' label="Type" variant="outlined" value={transaction.type} select >
             {types && types.map(type => (
               <MenuItem key={type._id} value={type._id}>{type.type}</MenuItem>

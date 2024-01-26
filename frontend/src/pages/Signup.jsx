@@ -5,6 +5,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -24,6 +26,7 @@ const defaultTheme = createTheme();
 
 function Signup() {
   const {setToken, setUser} = useStateContext();
+  const [errors, setErrors] = React.useState();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,14 +38,16 @@ function Signup() {
       password: data.get('password'),
     };
 
-    const response = await postData('POST', newData, '/users/new');
+    const response = await postData('POST', '/users/new', null, newData);
     const responseData = await response.json();
     console.log(responseData)
     if(response.ok){
-      setToken(responseData.token)
-      setUser(responseData.data.name)
+      setToken(responseData.token);
+      setUser(responseData.data.name);
+      return;
     }
 
+    setErrors([responseData.message]);
 
   };
   return (
@@ -57,6 +62,11 @@ function Signup() {
             alignItems: 'center',
           }}
         >
+          <Stack sx={{ width: '100%' }} spacing={.5}>
+            {errors && errors.map((err, index) => (
+              <Alert key={index} severity="error">{err}</Alert>
+          ))}
+          </Stack>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>

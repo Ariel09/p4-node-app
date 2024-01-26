@@ -8,7 +8,7 @@ export const fetchData = async (method, url, token) => {
           // Add other headers if needed
         },
       });
-      console.log(response)
+      
       return response;
     } catch (error) {
       console.error(error.message)

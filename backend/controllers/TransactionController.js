@@ -9,10 +9,6 @@ export const addTransaction = asyncHandler(async (req, res) => {
   const user = req.user._id;
   const {type, category, amount} = req.body;
 
-  if(!type || !category || !amount){
-    res.status(400);
-    throw new Error('All fields are required!')
-  }
 
   const transaction = transactionFactory.create(user, type, category, amount);
 

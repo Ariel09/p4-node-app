@@ -14,10 +14,6 @@ const generateToken = (id) => {
 export const registerUser = asyncHandler(async (req, res) =>{
   const {username, fullName, email, password } = req.body;
 
-  if (!username || !fullName || !email || !password){
-    res.status(400);
-    throw new Error('All fields are required!');
-  }
   const userExist = await userRepository.findUser({username: username}) || await userRepository.findUser({email: email});
 
   if(userExist) {
@@ -46,12 +42,15 @@ export const registerUser = asyncHandler(async (req, res) =>{
       email: user.email,
     }
   })
-
-
 })
 
 export const loginUser = asyncHandler(async (req, res) => {
   const {username, password} = req.body;
+
+  if(!username || !password){
+    res.status(400);
+    throw new Error('Fields must not be Empty');
+  }
 
   const user = await userRepository.findUser({username: username});
 
@@ -73,6 +72,9 @@ export const loginUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Wrong Password')
   }
+
+  res.status(400);
+  throw new Error('User not exist!');
 })
 
 export const getUser = asyncHandler(async (req, res) =>{
