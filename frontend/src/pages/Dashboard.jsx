@@ -15,10 +15,11 @@ function Dashboard() {
 
   const getAllTransaction = async () =>{
     try {
-      const response = await fetchData(`/transactions/`, token);
-      console.log(response)
-    
-      setTransactions(response.data)
+      const response = await fetchData('GET', `/transactions/`, token);
+      const responseData = await response.json();
+      if(response.ok){
+        setTransactions(responseData.data)
+      }
     } catch (error) {
       console.error('Error: ', error.message);
     }

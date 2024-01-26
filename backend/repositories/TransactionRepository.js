@@ -7,6 +7,22 @@ class TransactionRepository{
     return transaction;
   }
 
+  async delete(id){
+    await Transaction.findByIdAndDelete(id);
+  }
+
+  async update(id, data){
+    const updatedTransaction = await Transaction.findByIdAndUpdate(id, data);
+
+    return updatedTransaction;
+  }
+
+  async findById(id){
+    const transaction = await Transaction.findById(id);
+
+    return transaction;
+  }
+
   async findAll(user){
     const transactions = await Transaction.find({user})
       .populate('type')
@@ -25,9 +41,7 @@ class TransactionRepository{
     return transactions;
   }
 
-  delete(id){
-    Transaction.findByIdAndDelete(id);
-  }
+
   
 }
 

@@ -7,11 +7,12 @@ import { fetchData, postData } from '../fetch/fetchData';
 import { useStateContext } from '../contexts/ContextProvider';
 import { transactionReducer } from './onChangeReducer';
 import { Button, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 function Transaction() {
   const navigate = useNavigate();
+  const {id} = useParams();
   const {token} = useStateContext();
   const [types, setTypes] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -19,7 +20,33 @@ function Transaction() {
     amount: '',
     type: '',
     category: '',
-  })
+  });
+
+  if(id){
+
+
+    useEffect(() => {
+      const getTransaction = async () => {
+        try {
+          const response = await fetchData('GET', `/transactions/view/${id}`, token);
+          const responseData = await response.json();
+          const {amount, type, category} = responseData.data;
+          const payload = {amount, type, category}
+          await getCategory(type);
+          dispatch({
+            type: 'view',
+            payload: payload
+          })
+  
+        } catch (error) {
+          console.error('Error: ', error.message);
+        }
+      }
+
+      getTransaction();
+    }, [])
+  }
+
   const handleChange = (e) => {
     console.log(e.target.name)
     dispatch({
@@ -39,7 +66,17 @@ function Transaction() {
 
   const handleSubmit = async () => {
     try {
-      const response = await postData('POST', transaction, '/transactions/new', token);
+      let method;
+      let url;
+      if(id){
+       method = 'PATCH';
+       url = `/transactions/view/${id}`; 
+      }else{
+       method = 'POST';
+       url = '/transactions/new';
+      }
+
+      const response = await postData(method, url, token, transaction);
 
       if(response.ok){
         navigate('/dashboard');
@@ -51,9 +88,11 @@ function Transaction() {
 
   const getType = async () =>{
     try {
-      const response = await fetchData('/types/', token);
-
-      setTypes(response.data)
+      const response = await fetchData('GET', '/types/', token);
+      const responseData = await response.json();
+      if(response.ok){
+        setTypes(responseData.data)
+      }
     } catch (error) {
       console.error('Error: ', error.message)
     }
@@ -61,9 +100,12 @@ function Transaction() {
 
   const getCategory = async (type) => {
     try {
-      const  response = await fetchData(`/categories/type/${type}`, token);
-
-      setCategories(response.data)
+      const  response = await fetchData('GET', `/categories/type/${type}`, token);
+      const responseData = await response.json();
+      if(response.ok){
+        setCategories(responseData.data)
+      }
+      
     } catch (error) {
         console.error('Error: ', error.message)
     }
@@ -79,9 +121,8 @@ function Transaction() {
 
   return (
     <Container maxWidth="md">
-      <Box sx={{ 
-        bgcolor: '#cfe8fc', 
-        height: '40vh',
+      <Box sx={{
+        height: 'auto',
         display: 'flex',
         flexDirection: 'column',
         placeItems: 'center',
@@ -117,7 +158,7 @@ function Transaction() {
           display: 'flex',
           placeContent: 'center',
         }}>
-          <Button onClick={handleSubmit} size='large' variant="contained">ADD</Button>
+          <Button onClick={handleSubmit} size='large' variant="contained">{id ? 'SAVE' : 'ADD'}</Button>
         </Box>
       </Box>
     </Container>

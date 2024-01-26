@@ -32,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: '/transaction/new',
         element: <Transaction/>
+      },
+      {
+        path: '/transaction/:id',
+        element: <Transaction/>
       }
     ]
   },

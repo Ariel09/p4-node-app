@@ -13,7 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import {Link} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useStateContext } from '../contexts/ContextProvider';
-import { fetchData, postData } from '../fetch/fetchData';
+import { fetchData} from '../fetch/fetchData';
 
 
 function AllTransaction() {
@@ -24,10 +24,13 @@ function AllTransaction() {
   
   const getAllTransaction = async () =>{
     try {
-      const response = await fetchData(`/transactions/${sortType}`, token);
-      console.log(response)
-    
-      setTransactions(response.data)
+      const response = await fetchData('GET', `/transactions/${sortType}`, token);
+      const responseData = await response.json();
+
+      if(response.ok){
+        setTransactions(responseData.data)
+      }
+      
     } catch (error) {
       console.error('Error: ', error.message);
     }
@@ -35,7 +38,7 @@ function AllTransaction() {
 
   const getType = async () =>{
     try {
-      const response = await fetchData('/types/', token);
+      const response = await fetchData('GET', '/types/', token);
 
       setTypes(response.data)
     } catch (error) {
@@ -45,9 +48,8 @@ function AllTransaction() {
   
   const handleClick = async (id) =>{
     try {
-      const response = await postData('DELETE', null, `/transaction/${id}`, token );
-      const responesData = await response.json();
-      console.log(responesData)
+      const response = await fetchData('DELETE', `/transactions/${id}`, token);
+      console.log(response)
       if(response.ok){
         await getAllTransaction()
       }
@@ -111,7 +113,7 @@ function AllTransaction() {
                 <TableCell align="right">{transaction.category.category}</TableCell>
                 <TableCell align="right">{new Date(transaction.createdAt).toLocaleDateString()}</TableCell>
                 <TableCell align="center">
-                  <Link to={'/transactions/' + transaction._id}><Button  variant='contained' color='info' size='small'>View</Button></Link>
+                  <Link to={'/transaction/' + transaction._id}><Button  variant='contained' color='info' size='small'>Edit</Button></Link>
                   <Button variant='contained' color='error' size='small'  onClick={()=>handleClick(transaction._id)}>Delete</Button>
                 </TableCell>
               </TableRow>

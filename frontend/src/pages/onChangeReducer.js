@@ -6,6 +6,8 @@ export const transactionReducer = (state, action) => {
       return {...state, type: action.payload};
     case 'category':
       return {...state, category: action.payload};
+    case 'view':
+      return {...action.payload};
     default:
         return state;
   }
