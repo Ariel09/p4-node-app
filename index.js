@@ -2,12 +2,12 @@ import express from 'express';
 import process from 'process';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
-import connectDB from './config/db.js';
-import errorHandler from './middleware/errorHandler.js';
-import userRoutes from './routes/userRoutes.js';
-import transactionRoutes from './routes/TransactionRoutes.js'
-import categoryRoutes from './routes/CategoryRoutes.js'
-import typeRoutes from './routes/TypeRoutes.js'
+import connectDB from './backend/config/db.js';
+import errorHandler from './backend/middleware/errorHandler.js';
+import userRoutes from './backend/routes/userRoutes.js';
+import transactionRoutes from './backend/routes/TransactionRoutes.js'
+import categoryRoutes from './backend/routes/CategoryRoutes.js'
+import typeRoutes from './backend/routes/TypeRoutes.js'
 import cors from 'cors';
 
 
