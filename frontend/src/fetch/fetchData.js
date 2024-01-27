@@ -1,6 +1,8 @@
+
 export const fetchData = async (method, url, token) => {
     try {
-      const response = await fetch('http://127.0.0.1:3000/api' + url, {
+      const apiUrl = import.meta.env.VITE_API_URL;
+      const response = await fetch(apiUrl + '/api' + url, {
         method: method,
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -17,7 +19,8 @@ export const fetchData = async (method, url, token) => {
 
 export const postData = async (method, url, token, data) =>{
   try {
-    const response = await fetch('http://127.0.0.1:3000/api'+url, {
+    const apiUrl = import.meta.env.VITE_API_URL;
+    const response = await fetch(apiUrl + '/api' + url, {
       method: method,      
       headers: {
         'Authorization': `Bearer ${token}`,
