@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import connectDB from './config/db.js';
 import errorHandler from './middleware/errorHandler.js';
-import userRoutes from './routes/userRoutes.js';
+import userRoutes from './routes/UserRoutes.js';
 import transactionRoutes from './routes/TransactionRoutes.js'
 import categoryRoutes from './routes/CategoryRoutes.js'
 import typeRoutes from './routes/TypeRoutes.js'
