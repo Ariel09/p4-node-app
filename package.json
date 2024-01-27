@@ -3,6 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
   "scripts": {
     "start": "nodemon ./backend",
     "client": "npm start --prefix frontend",
@@ -23,3 +27,4 @@
     "nodemon": "^2.0.20"
   }
 }
+
