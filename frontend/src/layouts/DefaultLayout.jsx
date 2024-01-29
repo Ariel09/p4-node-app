@@ -11,7 +11,7 @@ function DefaulLayout() {
 
   return (
     <div>
-      <Navbar/>
+      <NavBar/>
       <div className="outlet-container">
         <Outlet/>
       </div>
