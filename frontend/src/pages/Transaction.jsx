@@ -102,10 +102,8 @@ function Transaction() {
 
   const handleSubmit = async () => {
     if(checkError() || errors){
-      console.log('Nag return')
       return;
     }
-    console.log('Di nag return')
     try {
       let method;
       let url;
