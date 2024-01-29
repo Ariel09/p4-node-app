@@ -20,7 +20,7 @@ connectDB().then(() => {
   
   
   const corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: 'https://my-finance-tracker.onrender.com',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   };
   
