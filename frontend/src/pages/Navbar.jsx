@@ -6,7 +6,7 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import { Link } from 'react-router-dom';
 import { useStateContext } from '../contexts/ContextProvider';
 
-function Navbar() {
+function NavBar() {
   const {user, setUser, setToken} = useStateContext();
   console.log(user)
 
@@ -41,4 +41,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavBar;
